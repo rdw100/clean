@@ -13,9 +13,24 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentatio
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{88CED52E-4EA9-44B1-A2D5-34B92472EB8C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bank.Mvc", "bank.mvc\Bank.Mvc.csproj", "{9EA03D9F-0DFB-475F-B99D-3C94D3933049}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9EA03D9F-0DFB-475F-B99D-3C94D3933049}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9EA03D9F-0DFB-475F-B99D-3C94D3933049}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9EA03D9F-0DFB-475F-B99D-3C94D3933049}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9EA03D9F-0DFB-475F-B99D-3C94D3933049}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{9EA03D9F-0DFB-475F-B99D-3C94D3933049} = {BCDD8B3A-2B18-49C5-8CDA-576ADA67FA0F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {843A8D53-0437-48A2-9FA1-0904D39EDF7A}
