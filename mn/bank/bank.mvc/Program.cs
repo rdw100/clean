@@ -1,4 +1,5 @@
 using Bank.Data.Context;
+using Bank.IoC;
 using Bank.Mvc.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -20,6 +21,9 @@ builder.Services.AddDbContext<BankDbContext>(options =>
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
+
+// Add application specific dependency injection
+RegisterServices(builder.Services);
 
 var app = builder.Build();
 
@@ -48,3 +52,8 @@ app.MapControllerRoute(
 app.MapRazorPages();
 
 app.Run();
+
+static void RegisterServices(IServiceCollection services)
+{
+    DependencyContainer.RegisterServices(services);
+}

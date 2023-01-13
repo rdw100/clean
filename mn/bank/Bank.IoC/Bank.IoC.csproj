@@ -10,4 +10,9 @@
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Bank.Application\Bank.Application.csproj" />
+    <ProjectReference Include="..\Bank.Data\Bank.Data.csproj" />
+  </ItemGroup>
+
 </Project>
