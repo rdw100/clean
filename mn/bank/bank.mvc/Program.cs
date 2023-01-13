@@ -1,3 +1,4 @@
+using Bank.Data.Context;
 using Bank.Mvc.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -5,10 +6,16 @@ using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-var connectionString = builder.Configuration.GetConnectionString("BankIdentityDbConnection") ?? throw new InvalidOperationException("Connection string 'BankIdentityDbConnection' not found.");
+var bankIdentityConnectionString = builder.Configuration.GetConnectionString("BankIdentityDbConnection") ?? throw new InvalidOperationException("Connection string 'BankIdentityDbConnection' not found.");
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(connectionString));
+    options.UseSqlServer(bankIdentityConnectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+
+var bankConnectionString = builder.Configuration.GetConnectionString("BankDbConnection") ?? throw new InvalidOperationException("Connection string 'BankDbConnection' not found.");
+builder.Services.AddDbContext<BankDbContext>(options =>
+{
+    options.UseSqlServer(bankConnectionString);
+});
 
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ApplicationDbContext>();

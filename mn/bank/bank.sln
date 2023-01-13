@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bank.Mvc", "bank.mvc\Bank.M
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bank.Domain", "Bank.Domain\Bank.Domain.csproj", "{4E6FC1B6-E82C-4660-8C06-E063E94B62FC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bank.Data", "Bank.Data\Bank.Data.csproj", "{0C0D30AF-8AEF-4BE4-A9D6-65C9554DDC09}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +33,10 @@ Global
 		{4E6FC1B6-E82C-4660-8C06-E063E94B62FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4E6FC1B6-E82C-4660-8C06-E063E94B62FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4E6FC1B6-E82C-4660-8C06-E063E94B62FC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0C0D30AF-8AEF-4BE4-A9D6-65C9554DDC09}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C0D30AF-8AEF-4BE4-A9D6-65C9554DDC09}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C0D30AF-8AEF-4BE4-A9D6-65C9554DDC09}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C0D30AF-8AEF-4BE4-A9D6-65C9554DDC09}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -38,6 +44,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{9EA03D9F-0DFB-475F-B99D-3C94D3933049} = {BCDD8B3A-2B18-49C5-8CDA-576ADA67FA0F}
 		{4E6FC1B6-E82C-4660-8C06-E063E94B62FC} = {AD0FAE3C-6307-497D-AEF5-25E489D9ABB2}
+		{0C0D30AF-8AEF-4BE4-A9D6-65C9554DDC09} = {315D3352-5FEC-4695-B956-CC3829B30664}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {843A8D53-0437-48A2-9FA1-0904D39EDF7A}
