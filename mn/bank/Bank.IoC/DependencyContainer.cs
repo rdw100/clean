@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Bank.IoC
 {
-    internal class DependencyContainer
+    public class DependencyContainer
     {
+
     }
 }
