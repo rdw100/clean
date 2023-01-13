@@ -10,6 +10,6 @@ namespace Bank.Application.Interfaces
 {
     public interface IAccountService
     {
-        IEnumerable<AccountViewModel> GetAccounts();
+        AccountViewModel GetAccounts();
     }
 }
