@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Bank.Domain.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +9,9 @@ namespace Bank.Application.ViewModels
 {
     public class AccountViewModel
     {
+        public int Id { get; set; }
+        public string Owner { get; set; }
+        public decimal Balance { get; }
+        public IEnumerable<Account> Accounts { get; set; }
     }
 }

@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Bank.Application.Interfaces;
+using Bank.Application.ViewModels;
 
 namespace Bank.Application.Services
 {
-    public class AccountService
+    public class AccountService : IAccountService
     {
+        public IEnumerable<AccountViewModel> GetAccounts()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
