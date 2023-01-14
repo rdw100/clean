@@ -23,7 +23,7 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
 builder.Services.AddControllersWithViews();
 
 // Add application specific dependency injection
-RegisterServices(builder.Services);
+//RegisterServices(builder.Services);
 
 var app = builder.Build();
 

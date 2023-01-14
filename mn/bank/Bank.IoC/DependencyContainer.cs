@@ -20,7 +20,7 @@ namespace Bank.IoC
 
             // Infrastructure Layer - Data
             services.AddScoped<IAccountRepository, IAccountRepository>();
-            services.AddScoped<BankDbContext>();
+            //services.AddScoped<BankDbContext>();
         }
     }
 }
