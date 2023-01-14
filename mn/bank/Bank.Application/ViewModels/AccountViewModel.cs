@@ -11,7 +11,7 @@ namespace Bank.Application.ViewModels
     {
         public int Id { get; set; }
         public string Owner { get; set; }
-        public decimal Balance { get; }
+        public decimal Balance { get; set; }
         public IEnumerable<Account> Accounts { get; set; }
     }
 }
