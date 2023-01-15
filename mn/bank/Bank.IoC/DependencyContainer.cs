@@ -1,13 +1,8 @@
 ﻿using Bank.Application.Interfaces;
 using Bank.Application.Services;
-using Bank.Data.Context;
+using Bank.Data.Repository;
 using Bank.Domain.Interface;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Bank.IoC
 {
@@ -19,7 +14,7 @@ namespace Bank.IoC
             services.AddScoped<IAccountService, AccountService>();
 
             // Infrastructure Layer - Data
-            services.AddScoped<IAccountRepository, IAccountRepository>();
+            services.AddScoped<IAccountRepository, AccountRepository>();
             //services.AddScoped<BankDbContext>();
         }
     }

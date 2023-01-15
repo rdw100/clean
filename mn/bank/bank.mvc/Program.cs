@@ -18,12 +18,12 @@ builder.Services.AddDbContext<BankDbContext>(options =>
     options.UseSqlServer(bankConnectionString);
 });
 
-builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
 
 // Add application specific dependency injection
-//RegisterServices(builder.Services);
+RegisterServices(builder.Services);
 
 var app = builder.Build();
 

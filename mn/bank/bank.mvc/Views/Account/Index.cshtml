@@ -1,0 +1,17 @@
+﻿@model Bank.Application.ViewModels.AccountViewModel
+
+<h2>Accounts - Responsive Column Cards</h2>
+<p>Resize the browser window to see the wrapping effect.</p>
+
+<div class="row">
+    @foreach (var account in Model.Accounts)
+    {
+        <div class="column">
+            <div class="card">
+                <h3>@account.Owner</h3>
+                <p>@account.Id</p>
+                <p>@account.Balance</p>
+            </div>
+        </div>
+    }
+</div>
