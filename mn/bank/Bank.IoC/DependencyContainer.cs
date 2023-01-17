@@ -20,7 +20,7 @@ namespace Bank.IoC
             services.AddScoped<IMediatorHandler, InMemoryBus>();
 
             // Domain Layer - Domain Handlers
-            services.AddScoped<IRequestHandler<CreateAccountCommand, bool>, CourseCommandHandler>();
+            services.AddScoped<IRequestHandler<CreateAccountCommand, bool>, AccountCommandHandler>();
 
             // Application Layer
             services.AddScoped<IAccountService, AccountService>();

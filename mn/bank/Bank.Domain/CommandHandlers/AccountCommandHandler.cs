@@ -5,11 +5,11 @@ using MediatR;
 
 namespace Bank.Domain.CommandHandlers
 {
-    public class CourseCommandHandler : IRequestHandler<CreateAccountCommand, bool>
+    public class AccountCommandHandler : IRequestHandler<CreateAccountCommand, bool>
     {
         private readonly IAccountRepository _accountRepository;
 
-        public CourseCommandHandler(IAccountRepository accountRepository)
+        public AccountCommandHandler(IAccountRepository accountRepository)
         {
             _accountRepository = accountRepository;
         }
