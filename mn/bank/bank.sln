@@ -13,15 +13,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentatio
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{88CED52E-4EA9-44B1-A2D5-34B92472EB8C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bank.Mvc", "bank.mvc\Bank.Mvc.csproj", "{9EA03D9F-0DFB-475F-B99D-3C94D3933049}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bank.Mvc", "bank.mvc\Bank.Mvc.csproj", "{9EA03D9F-0DFB-475F-B99D-3C94D3933049}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bank.Domain", "Bank.Domain\Bank.Domain.csproj", "{4E6FC1B6-E82C-4660-8C06-E063E94B62FC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bank.Domain", "Bank.Domain\Bank.Domain.csproj", "{4E6FC1B6-E82C-4660-8C06-E063E94B62FC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bank.Data", "Bank.Data\Bank.Data.csproj", "{0C0D30AF-8AEF-4BE4-A9D6-65C9554DDC09}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bank.Data", "Bank.Data\Bank.Data.csproj", "{0C0D30AF-8AEF-4BE4-A9D6-65C9554DDC09}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bank.Application", "Bank.Application\Bank.Application.csproj", "{C4BCA662-835F-40C0-9D78-BC9A35A70CA5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bank.Application", "Bank.Application\Bank.Application.csproj", "{C4BCA662-835F-40C0-9D78-BC9A35A70CA5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bank.IoC", "Bank.IoC\Bank.IoC.csproj", "{52831CD5-050D-48A9-B5F6-B58C4257B08D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bank.IoC", "Bank.IoC\Bank.IoC.csproj", "{52831CD5-050D-48A9-B5F6-B58C4257B08D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
