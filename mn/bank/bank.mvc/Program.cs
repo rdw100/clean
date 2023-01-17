@@ -1,8 +1,10 @@
 using Bank.Data.Context;
 using Bank.IoC;
 using Bank.Mvc.Data;
+using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,6 +23,8 @@ builder.Services.AddDbContext<BankDbContext>(options =>
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddMediatR(Assembly.GetExecutingAssembly());
 
 // Add application specific dependency injection
 RegisterServices(builder.Services);

@@ -11,5 +11,6 @@ namespace Bank.Application.Interfaces
     public interface IAccountService
     {
         AccountViewModel GetAccounts();
+        void Create(AccountViewModel accountViewModel);
     }
 }
