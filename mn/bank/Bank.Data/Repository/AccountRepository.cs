@@ -18,6 +18,12 @@ namespace Bank.Data.Repository
             _ctx = ctx;
         }
 
+        public void Add(Account account)
+        {
+            _ctx.Accounts.Add(account);
+            _ctx.SaveChanges();
+        }
+
         public IEnumerable<Account> GetAccounts()
         {
             return _ctx.Accounts;
