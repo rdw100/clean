@@ -13,7 +13,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentatio
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{88CED52E-4EA9-44B1-A2D5-34B92472EB8C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bank.Mvc", "bank.mvc\Bank.Mvc.csproj", "{9EA03D9F-0DFB-475F-B99D-3C94D3933049}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bank.Mvc", "Bank.Mvc\Bank.Mvc.csproj", "{9EA03D9F-0DFB-475F-B99D-3C94D3933049}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bank.Domain", "Bank.Domain\Bank.Domain.csproj", "{4E6FC1B6-E82C-4660-8C06-E063E94B62FC}"
 EndProject
