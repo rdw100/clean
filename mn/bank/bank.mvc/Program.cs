@@ -1,5 +1,5 @@
-using Bank.Data.Context;
-using Bank.IoC;
+using Bank.Infra.Data.Context;
+using Bank.Infra.IoC;
 using Bank.Mvc.Data;
 using MediatR;
 using Microsoft.AspNetCore.Identity;

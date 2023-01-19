@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace Bank.Data.Migrations
+namespace Bank.Infra.Data.Migrations
 {
     /// <inheritdoc />
     public partial class InitialMigration : Migration

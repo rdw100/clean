@@ -1,16 +1,16 @@
 ﻿using Bank.Application.Interfaces;
 using Bank.Application.Services;
-using Bank.Bus;
-using Bank.Core.Bus;
-using Bank.Data.Context;
-using Bank.Data.Repository;
 using Bank.Domain.CommandHandlers;
 using Bank.Domain.Commands;
+using Bank.Domain.Core.Bus;
 using Bank.Domain.Interface;
+using Bank.Infra.Bus;
+using Bank.Infra.Data.Context;
+using Bank.Infra.Data.Repository;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Bank.IoC
+namespace Bank.Infra.IoC
 {
     public class DependencyContainer
     {

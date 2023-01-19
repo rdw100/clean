@@ -17,21 +17,21 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bank.Mvc", "Bank.Mvc\Bank.M
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bank.Domain", "Bank.Domain\Bank.Domain.csproj", "{4E6FC1B6-E82C-4660-8C06-E063E94B62FC}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bank.Data", "Bank.Data\Bank.Data.csproj", "{0C0D30AF-8AEF-4BE4-A9D6-65C9554DDC09}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bank.Infra.Data", "Bank.Data\Bank.Infra.Data.csproj", "{0C0D30AF-8AEF-4BE4-A9D6-65C9554DDC09}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bank.Application", "Bank.Application\Bank.Application.csproj", "{C4BCA662-835F-40C0-9D78-BC9A35A70CA5}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bank.IoC", "Bank.IoC\Bank.IoC.csproj", "{52831CD5-050D-48A9-B5F6-B58C4257B08D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bank.Infra.IoC", "Bank.IoC\Bank.Infra.IoC.csproj", "{52831CD5-050D-48A9-B5F6-B58C4257B08D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bank.Bus", "Bank.Bus\Bank.Bus.csproj", "{2F854ECC-7423-4E44-8E8D-2A5597DA7642}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bank.Infra.Bus", "Bank.Bus\Bank.Infra.Bus.csproj", "{2F854ECC-7423-4E44-8E8D-2A5597DA7642}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Api", "Api", "{5360AFA1-2D7C-4D8D-9D05-2491658EF111}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bank.Core", "Bank.Core\Bank.Core.csproj", "{189CF655-DA25-4177-BBE8-0757C42FB18D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bank.Domain.Core", "Bank.Core\Bank.Domain.Core.csproj", "{189CF655-DA25-4177-BBE8-0757C42FB18D}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bank.Api", "Bank.Api\Bank.Api.csproj", "{FBA870C3-DD75-4AE9-A235-1426DED8544B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bank.Tests.Arch", "Bank.Tests.Architecture\Bank.Tests.Arch.csproj", "{FA0F4D4F-E7AC-4D28-A2F5-A94DA3EE36C8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bank.Tests.Arch", "Bank.Tests.Architecture\Bank.Tests.Arch.csproj", "{FA0F4D4F-E7AC-4D28-A2F5-A94DA3EE36C8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

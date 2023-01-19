@@ -1,5 +1,5 @@
-using Bank.Data.Context;
-using Bank.IoC;
+using Bank.Infra.Data.Context;
+using Bank.Infra.IoC;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;

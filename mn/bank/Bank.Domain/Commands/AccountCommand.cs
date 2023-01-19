@@ -1,4 +1,4 @@
-﻿using Bank.Core.Commands;
+﻿using Bank.Domain.Core.Commands;
 
 namespace Bank.Domain.Commands
 {

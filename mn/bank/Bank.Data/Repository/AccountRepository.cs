@@ -1,4 +1,4 @@
-﻿using Bank.Data.Context;
+﻿using Bank.Infra.Data.Context;
 using Bank.Domain.Interface;
 using Bank.Domain.Models;
 using System;
@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Bank.Data.Repository
+namespace Bank.Infra.Data.Repository
 {
     public class AccountRepository : IAccountRepository
     {

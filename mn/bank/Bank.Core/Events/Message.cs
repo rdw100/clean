@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace Bank.Core.Events
+namespace Bank.Domain.Core.Events
 {
     public abstract class Message : IRequest<bool>
     {

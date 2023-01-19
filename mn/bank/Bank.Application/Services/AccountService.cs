@@ -1,6 +1,6 @@
 ﻿using Bank.Application.Interfaces;
 using Bank.Application.ViewModels;
-using Bank.Core.Bus;
+using Bank.Domain.Core.Bus;
 using Bank.Domain.Commands;
 using Bank.Domain.Interface;
 

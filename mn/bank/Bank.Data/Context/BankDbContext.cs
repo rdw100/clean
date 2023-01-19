@@ -1,7 +1,7 @@
 ﻿using Bank.Domain.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace Bank.Data.Context
+namespace Bank.Infra.Data.Context
 {
     public class BankDbContext : DbContext
     {

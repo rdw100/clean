@@ -1,6 +1,6 @@
-﻿using Bank.Core.Commands;
+﻿using Bank.Domain.Core.Commands;
 
-namespace Bank.Core.Bus
+namespace Bank.Domain.Core.Bus
 {
     public interface IMediatorHandler
     {

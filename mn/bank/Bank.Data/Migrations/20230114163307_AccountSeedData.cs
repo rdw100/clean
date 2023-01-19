@@ -4,7 +4,7 @@
 
 #pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
 
-namespace Bank.Data.Migrations
+namespace Bank.Infra.Data.Migrations
 {
     /// <inheritdoc />
     public partial class AccountSeedData : Migration

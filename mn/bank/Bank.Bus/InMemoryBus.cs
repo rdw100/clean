@@ -1,8 +1,8 @@
-﻿using Bank.Core.Bus;
-using Bank.Core.Commands;
+﻿using Bank.Domain.Core.Bus;
+using Bank.Domain.Core.Commands;
 using MediatR;
 
-namespace Bank.Bus
+namespace Bank.Infra.Bus
 {
     public sealed class InMemoryBus : IMediatorHandler
     {

@@ -1,6 +1,6 @@
-﻿using Bank.Core.Events;
+﻿using Bank.Domain.Core.Events;
 
-namespace Bank.Core.Commands
+namespace Bank.Domain.Core.Commands
 {
     public abstract class Command : Message
     {

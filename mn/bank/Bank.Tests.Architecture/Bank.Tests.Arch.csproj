@@ -24,7 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Bank.Core\Bank.Core.csproj" />
+    <ProjectReference Include="..\Bank.Core\Bank.Domain.Core.csproj" />
     <ProjectReference Include="..\Bank.Domain\Bank.Domain.csproj" />
     <ProjectReference Include="..\Bank.Mvc\Bank.Mvc.csproj" />
   </ItemGroup>
