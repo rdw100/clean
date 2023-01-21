@@ -24,8 +24,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Bank.Api\Bank.Api.csproj" />
+    <ProjectReference Include="..\Bank.Application\Bank.Application.csproj" />
+    <ProjectReference Include="..\Bank.Bus\Bank.Infra.Bus.csproj" />
     <ProjectReference Include="..\Bank.Core\Bank.Domain.Core.csproj" />
+    <ProjectReference Include="..\Bank.Data\Bank.Infra.Data.csproj" />
     <ProjectReference Include="..\Bank.Domain\Bank.Domain.csproj" />
+    <ProjectReference Include="..\Bank.IoC\Bank.Infra.IoC.csproj" />
     <ProjectReference Include="..\Bank.Mvc\Bank.Mvc.csproj" />
   </ItemGroup>
 
