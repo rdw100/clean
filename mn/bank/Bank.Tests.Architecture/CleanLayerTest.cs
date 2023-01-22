@@ -1,15 +1,10 @@
-﻿using static ArchUnitNET.Fluent.ArchRuleDefinition;
+﻿using ArchUnitNET.xUnit;
+using static ArchUnitNET.Fluent.ArchRuleDefinition;
 
 namespace Bank.Tests.Arch
 {
     public class CleanLayerTest
     {
-        private static readonly Architecture domainCoreArchitecture =
-            new ArchLoader().LoadAssemblies(
-                    System.Reflection.Assembly.Load("Bank.Domain")
-                )
-                .Build();
-
         private static readonly Architecture domainToCoreArchitecture =
             new ArchLoader().LoadAssemblies(
                     System.Reflection.Assembly.Load("Bank.Domain"),
@@ -31,15 +26,21 @@ namespace Bank.Tests.Arch
                 )
                 .Build();
 
+        private static readonly Architecture infraDataToDomainArchitecture = 
+            new ArchLoader().LoadAssemblies(
+                System.Reflection.Assembly.Load("Bank.Infra.Data"),
+                System.Reflection.Assembly.Load("Bank.Domain"))
+                .Build();
+
         /// <summary>
         /// 
         /// </summary>
         /// <remarks>HaveFullNameContaining traverses qualified identifiers.</remarks>
-        private readonly IObjectProvider<IType> DomainLayer =
+        private readonly IObjectProvider<IType> DomainLayerFull =
             Types().That().HaveFullNameContaining("Bank.Domain").As("Domain Layer");
 
-        private readonly IObjectProvider<IType> DomainCoreLayer =
-            Types().That().HaveFullNameContaining("Bank.Domain.Core").As("Domain Core Layer");
+        private readonly IObjectProvider<IType> DomainCoreLayerFull =
+            Types().That().HaveFullNameContaining("Bank.Domain.Core").As("Domain Layer Core");
 
         private readonly IObjectProvider<IType> ApplicationLayer =
             Types().That().HaveFullNameContaining("Bank.Application").As("Application Layer");
@@ -47,19 +48,62 @@ namespace Bank.Tests.Arch
         private readonly IObjectProvider<IType> PresentationLayer =
             Types().That().HaveFullNameContaining("Bank.Mvc").As("Presentation Layer");
 
-        //Types().That().ResideInNamespace("Bank.Domain.Core").As("Forbidden Layer");
+        private readonly IObjectProvider<IType> InfraLayerDataFull =
+            Types().That().HaveFullNameContaining("Bank.Infra.Data").As("Infrastructure Layer - Data");
 
-        //private readonly IObjectProvider<IType> Domain =
-        //    Types().That().ResideInAssembly("Bank.Domain").As("Domain Layer");
+        [Fact]
+        public void InfraLayerData_DependsOnDomain_ReturnsTrue()
+        {
+            IArchRule infraDataShouldAccessDomain =
+                Types().That().Are(InfraLayerDataFull).Should()
+                .DependOnAny(DomainLayerFull).OrShould()
+                .DependOnAny("^System.", true).OrShould()
+                .DependOnAny("^Microsoft.", true)
+                .Because("It's required.");
+            bool checkedRule = infraDataShouldAccessDomain.HasNoViolations(infraDataToDomainArchitecture);
+            Assert.True(checkedRule, "Infra Data must depend on Domain.");
+            //infraDataShouldAccessDomain.Check(infraDataToDomainArchitecture);
+        }
 
-        //private readonly IObjectProvider<IType> DomainCore =
-        //    Types().That().ResideInAssembly("Bank.Domain.Core").As("Domain Layer - Core");
+        [Fact]
+        public void InfraLayerData_DoesNotDependsOnDomain_ReturnsFalse()
+        {
+            IArchRule infraDataShouldNotAccessDomain =
+                Types().That().Are(InfraLayerDataFull).Should()
+                .NotDependOnAny(DomainLayerFull).OrShould()
+                .NotDependOnAny("^System.", true).OrShould()
+                .NotDependOnAny("^Microsoft.", true)
+                .Because("It's required.");
+            bool checkedRule = infraDataShouldNotAccessDomain.HasNoViolations(infraDataToDomainArchitecture);
+            Assert.False(checkedRule, "Infra Data must depend on Domain.");
+            //infraDataShouldNotAccessDomain.Check(infraDataToDomainArchitecture);
+        }
 
-        //private readonly IObjectProvider<IType> Application =
-        //    Types().That().ResideInAssembly("Bank.Application").As("Application Layer");
+        [Fact]
+        public void DomainLayer_DependsOnCore_ReturnsTrue()
+        {
+            IArchRule domainShouldAccessDomainCore =
+                Types().That().Are(DomainLayerFull).Should()
+                .DependOnAny(DomainCoreLayerFull).OrShould()
+                .DependOnAny("^System.", true)
+                .Because("It's required.");
+            bool checkedRule = domainShouldAccessDomainCore.HasNoViolations(domainToCoreArchitecture);
+            Assert.True(checkedRule, "Domain must depend on Domain Core.");
+            //domainShouldAccessDomainCore.Check(domainToCoreArchitecture);
+        }
 
-        //private readonly IObjectProvider<IType> Presentation =
-        //    Types().That().ResideInAssembly("Bank.Mvc").As("Presentation Layer");
+        [Fact]
+        public void DomainLayer_DoesNotDependsOnCore_ReturnsFalse()
+        {
+            IArchRule domainShouldNotAccessDomainCore =
+                Types().That().Are(DomainLayerFull).Should()
+                .NotDependOnAny(DomainCoreLayerFull).OrShould()
+                .NotDependOnAny("^System.", true)
+                .Because("It's required.");
+            bool checkedRule = domainShouldNotAccessDomainCore.HasNoViolations(domainToCoreArchitecture);
+            Assert.False(checkedRule, "Domain must depend on Domain Core.");
+            //domainShouldNotAccessDomainCore.Check(domainToCoreArchitecture);
+        }
 
         [Fact]
         public void ApplicationLayer_DoesNotDependOnPresentation_ReturnsTrue()
@@ -68,18 +112,18 @@ namespace Bank.Tests.Arch
                 Types().That().Are(ApplicationLayer).Should()
                 .NotDependOnAny(PresentationLayer).Because("It's required.");
             bool checkedRule = applicationLayerShouldNotAccessPresentationLayer.HasNoViolations(applicationToPresentationArchitecture);
-            Assert.True(checkedRule, "Domain must only depend on Domain Core.");
+            Assert.True(checkedRule, "Application must not depend on Presentation.");
             //exampleLayerShouldNotAccessForbiddenLayer.Check(applicationToPresentationArchitecture);
         }
 
         [Fact]
-        public void ApplicationLayer_DoesNotDependOnPresentation_ReturnsFalse()
+        public void ApplicationLayer_DependsOnPresentation_ReturnsFalse()
         {
-            IArchRule applicationLayerShouldNotAccessPresentationLayer =
+            IArchRule applicationLayerShouldAccessPresentationLayer =
                 Types().That().Are(ApplicationLayer).Should()
                 .DependOnAny(PresentationLayer).Because("It's forbidden.");
-            bool checkedRule = applicationLayerShouldNotAccessPresentationLayer.HasNoViolations(applicationToPresentationArchitecture);
-            Assert.False(checkedRule, "Domain must only depend on Domain Core.");
+            bool checkedRule = applicationLayerShouldAccessPresentationLayer.HasNoViolations(applicationToPresentationArchitecture);
+            Assert.False(checkedRule, "Application must not depend on Presentation.");
             //exampleLayerShouldNotAccessForbiddenLayer.Check(applicationToPresentationArchitecture);
         }
 
@@ -87,7 +131,7 @@ namespace Bank.Tests.Arch
         public void DomainLayer_DoesNotDependOnApplicationLayer_ReturnsTrue()
         {
             IArchRule domainLayerShouldNotAccessApplicationLayer =
-                Types().That().Are(DomainLayer).Should()
+                Types().That().Are(DomainLayerFull).Should()
                 .NotDependOnAny(ApplicationLayer).Because("It's required.");            
             bool checkedRule = domainLayerShouldNotAccessApplicationLayer.HasNoViolations(domainToAppArchitecture);
             Assert.True(checkedRule, "Domain must not access Application.");
@@ -95,12 +139,12 @@ namespace Bank.Tests.Arch
         }
 
         [Fact]
-        public void DomainLayer_DoesNotDependOnApplicationLayer_ReturnsFalse()
+        public void DomainLayer_DependsOnApplicationLayer_ReturnsFalse()
         {
-            IArchRule domainLayerShouldNotAccessApplicationLayer =
-                Types().That().Are(DomainLayer).Should()
+            IArchRule domainLayerShouldAccessApplicationLayer =
+                Types().That().Are(DomainLayerFull).Should()
                 .DependOnAny(ApplicationLayer).Because("It's forbidden.");
-            bool checkedRule = domainLayerShouldNotAccessApplicationLayer.HasNoViolations(domainToAppArchitecture);
+            bool checkedRule = domainLayerShouldAccessApplicationLayer.HasNoViolations(domainToAppArchitecture);
             Assert.False(checkedRule, "Domain must not access Application.");
             //domainLayerShouldNotAccessApplicationLayer.Check(domainToAppArchitecture);
         }
