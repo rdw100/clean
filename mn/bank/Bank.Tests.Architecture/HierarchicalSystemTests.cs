@@ -21,6 +21,7 @@ namespace Bank.Tests.Arch
         [Fact]
         public void DomainShouldNotAccessDomainCore()
         {
+
             IArchRule domainShouldNotAccessCore =
                 Types().That().Are(Application).Should()
                 .NotDependOnAny(Presentation).Because("it's forbidden");
@@ -73,7 +74,7 @@ namespace Bank.Tests.Arch
                 .ResideInNamespace("Bank.Domain")
                 .Should()
                 .OnlyDependOnTypesThat()
-                .ResideInAssembly("Bank.Application");
+                .ResideInNamespace("Bank.Domain.Core");
                 
             bool checkedRule = rule.HasNoViolations(architectureDomain);
             Assert.True(checkedRule, "Domain must only depend on Domain Core.");
