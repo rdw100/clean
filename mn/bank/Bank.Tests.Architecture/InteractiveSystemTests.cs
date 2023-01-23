@@ -129,6 +129,7 @@ namespace Bank.Tests.Arch
             shouldBeNamedService.Check(applicationArchitecture);
         }
 
+        ///  Inheritance Naming Rule
         [Fact]
         public void Services_ShouldNotBeNamedService_ReturnsFalse()
         {
@@ -140,6 +141,7 @@ namespace Bank.Tests.Arch
             shouldNotBeNamedService.Check(applicationArchitecture);
         }
 
+        ///  Inheritance Naming Rule
         [Fact]
         public void Repository_ShouldBeNamedRepository_ReturnsTrue()
         {
@@ -151,6 +153,7 @@ namespace Bank.Tests.Arch
             shouldBeNamedRepository.Check(domainArchitecture);
         }
 
+        ///  Inheritance Naming Rule
         [Fact]
         public void Repository_ShouldNotBeNamedRepository_ReturnsFalse()
         {
