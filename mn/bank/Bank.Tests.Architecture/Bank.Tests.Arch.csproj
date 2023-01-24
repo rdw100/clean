@@ -4,8 +4,21 @@
     <TargetFramework>net7.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-
     <IsPackable>false</IsPackable>
+  </PropertyGroup>
+  
+  <PropertyGroup>
+    <AvoidCycleErrorOnSelfReference>true</AvoidCycleErrorOnSelfReference>
+  </PropertyGroup>
+  
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <NoWarn>1701;1702;NU1108</NoWarn>
+    <WarningsAsErrors>$(WarningsAsErrors);NU1605</WarningsAsErrors>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <NoWarn>1701;1702;NU1108</NoWarn>
+    <WarningsAsErrors>$(WarningsAsErrors);NU1605</WarningsAsErrors>
   </PropertyGroup>
 
   <ItemGroup>
@@ -25,12 +38,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Bank.Api\Bank.Api.csproj" />
-    <ProjectReference Include="..\Bank.Application\Bank.Application.csproj" />
-    <ProjectReference Include="..\Bank.Bus\Bank.Infra.Bus.csproj" />
-    <ProjectReference Include="..\Bank.Core\Bank.Domain.Core.csproj" />
-    <ProjectReference Include="..\Bank.Data\Bank.Infra.Data.csproj" />
     <ProjectReference Include="..\Bank.Domain\Bank.Domain.csproj" />
-    <ProjectReference Include="..\Bank.IoC\Bank.Infra.IoC.csproj" />
     <ProjectReference Include="..\Bank.Mvc\Bank.Mvc.csproj" />
   </ItemGroup>
 

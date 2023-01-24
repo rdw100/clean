@@ -100,8 +100,8 @@ namespace Bank.Tests.Arch
         // Namespace Dependency Rule
         [Fact]
         public void Models_ShouldNotDependOnApiControllers_ReturnsFalse()
-        {            
-            IArchRule shouldNotDependOnApiControllers = 
+        {
+            IArchRule shouldNotDependOnApiControllers =
                 Types()
                 .That()
                 .ResideInNamespace(DomainModels)
@@ -126,7 +126,10 @@ namespace Bank.Tests.Arch
                 .AreAssignableTo(typeof(IAccountService))
                 .Should()
                 .HaveNameContaining("Service");
-            shouldBeNamedService.Check(applicationArchitecture);
+
+            bool checkedRule = shouldBeNamedService.HasNoViolations(applicationArchitecture);
+            Assert.True(checkedRule, "A service should be named service.");
+            //shouldBeNamedService.Check(applicationArchitecture);
         }
 
         ///  Inheritance Naming Rule
@@ -138,7 +141,9 @@ namespace Bank.Tests.Arch
                 .AreAssignableTo(typeof(IAccountService))
                 .Should()
                 .NotHaveNameContaining("Service");
-            shouldNotBeNamedService.Check(applicationArchitecture);
+            bool checkedRule = shouldNotBeNamedService.HasNoViolations(applicationArchitecture);
+            Assert.False(checkedRule, "A service should be named service.");
+            //shouldNotBeNamedService.Check(applicationArchitecture);
         }
 
         ///  Inheritance Naming Rule
@@ -150,7 +155,9 @@ namespace Bank.Tests.Arch
                 .AreAssignableTo(typeof(IAccountRepository))
                 .Should()
                 .HaveNameContaining("Repository");
-            shouldBeNamedRepository.Check(domainArchitecture);
+            bool checkedRule = shouldBeNamedRepository.HasNoViolations(infraDataArchitecture);
+            Assert.True(checkedRule, "A repository should be named repository.");
+            //shouldBeNamedRepository.Check(infraDataArchitecture);
         }
 
         ///  Inheritance Naming Rule
@@ -162,7 +169,9 @@ namespace Bank.Tests.Arch
                 .AreAssignableTo(typeof(IAccountRepository))
                 .Should()
                 .NotHaveNameContaining("Repository");
-            shouldNotBeNamedRepository.Check(infraDataArchitecture);
+            bool checkedRule = shouldNotBeNamedRepository.HasNoViolations(infraDataArchitecture);
+            Assert.False(checkedRule, "A repository should be named repository.");
+            //shouldNotBeNamedRepository.Check(infraDataArchitecture);
         }
     }
 }
