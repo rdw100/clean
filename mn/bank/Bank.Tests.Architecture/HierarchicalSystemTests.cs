@@ -194,9 +194,9 @@ namespace Bank.Tests.Arch
                 .NotHaveAnyAttributesThat()
                 .Are(typeof(AuthorizeAttribute));
 
-            //bool checkedRule = shouldNotBeAuthorized.HasNoViolations(presentationArchitecture);
-            //Assert.False(checkedRule, "An MVC controller should be authorized.");
-            shouldNotBeAuthorized.Check(presentationArchitecture);
+            bool checkedRule = shouldNotBeAuthorized.HasNoViolations(presentationArchitecture);
+            Assert.False(checkedRule, "An MVC controller should be authorized.");
+            //shouldNotBeAuthorized.Check(presentationArchitecture);
         }
     }
 }
