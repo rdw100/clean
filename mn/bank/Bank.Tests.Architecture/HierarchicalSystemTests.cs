@@ -69,14 +69,9 @@ namespace Bank.Tests.Arch
         //private readonly IObjectProvider<IType> Presentation =
         //    Types().That().ResideInAssembly("Bank.Mvc").As("Presentation Layer");
 
-        //    //IObjectProvider<IType>[] moreTypes = new[]
-        //    //{
-        //    //    ApplicationLayer,
-        //    //    DomainLayer
-        //    //};
 
         //[Fact]
-        //public void Domain_OnlyDependsOnCore_Test()       
+        //public void Domain_OnlyDependsOnCore_Test()
         //{
         //    IArchRule rule = Types()
         //        .That()
@@ -97,25 +92,35 @@ namespace Bank.Tests.Arch
         //    applicationLayerShouldNotAccessPresentation.Check(architectureApplication);
         //}
 
-        //[Fact]
-        //public void ApplicationServicesShouldAccessDomain() 
-        //{
-        //    IEnumerable<string> moreTypes = new[]
-        //    {
-        //        "Bank.Domain.Core.Bus",
-        //        "Bank.Domain.Commands",
-        //        "Bank.Domain.Interface"
-        //    };
+        [Fact]
+        public void ApplicationServices_ShouldAccessDomain_ReturnsTrue()
+        {
+            IArchRule servicesShouldAccessDomain =
+                Types()
+                .That()
+                .ResideInNamespace(ApplicationServices)
+                .Should()
+                .DependOnAny(Types().That().ResideInNamespace("^Bank.Domain.", true));
 
-        //    IArchRule domainShouldNotAccessOtherLayers =
-        //        Types()
-        //        .That()
-        //        .ResideInAssembly("Bank.Application.Services")
-        //        .Should()
-        //        .DependOnAny(moreTypes);
+            bool checkedRule = servicesShouldAccessDomain.HasNoViolations(applicationToDomainArchitecture);
+            Assert.True(checkedRule, "Services should not access Models.");
+            //servicesShouldAccessDomain.Check(applicationToDomainArchitecture);
+        }
 
-        //    domainShouldNotAccessOtherLayers.Check(architectureApplication);
-        //}
+        [Fact]
+        public void ApplicationServices_ShouldAccessDomain_ReturnsFalse()
+        {
+            IArchRule servicesShouldNotAccessDomain =
+                Types()
+                .That()
+                .ResideInNamespace(ApplicationServices)
+                .Should()
+                .NotDependOnAny(Types().That().ResideInNamespace("^Bank.Domain.", true));
+
+            bool checkedRule = servicesShouldNotAccessDomain.HasNoViolations(applicationToDomainArchitecture);
+            Assert.False(checkedRule, "Services should not access Models.");
+            //servicesShouldNotAccessDomain.Check(applicationToDomainArchitecture);
+        }
 
         [Fact]
         public void ApplicationServices_ShouldNotAccessModels_ReturnsTrue()
