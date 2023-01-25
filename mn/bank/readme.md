@@ -4,13 +4,14 @@
       Infrastructure-->Application;
       Application-->Domain;     
 ```
-
+```puml
 @startuml firstDiagram
 
 Alice -> Bob: Hello
 Bob -> Alice: Hi!
 
 @enduml
+```
 
 @startuml
 package "Some Group" {
@@ -42,3 +43,4 @@ database "MySql" {
 [Example 1] --> [Folder 3]
 [Folder 3] --> [Frame 4]
 @enduml
+
