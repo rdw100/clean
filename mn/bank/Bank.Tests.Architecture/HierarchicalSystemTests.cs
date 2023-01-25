@@ -49,9 +49,11 @@ namespace Bank.Tests.Arch
 
         //// replace <ExampleClass> and <ForbiddenClass> with classes from the assemblies you want to test
 
-        //private static readonly Architecture architectureApplication = new ArchLoader().LoadAssemblies(
-        //    System.Reflection.Assembly.Load("Bank.Application"))
-        //    .Build();
+        private static readonly Architecture architectureApplication = new ArchLoader().LoadAssemblies(
+            System.Reflection.Assembly.Load("Bank.Application"),
+            System.Reflection.Assembly.Load("Bank.Domain")
+            )
+            .Build();
 
         //private static readonly Architecture architectureInfrastructureBus = new ArchLoader().LoadAssemblies(
         //    System.Reflection.Assembly.Load("Bank.Infra.Bus"))
@@ -143,23 +145,47 @@ namespace Bank.Tests.Arch
         //    domainShouldNotAccessOtherLayers.Check(architectureApplication);
         //}
 
-        //[Fact]
-        //public void ApplicationViewModelsShouldAccessModels()
-        //{
-        //    IEnumerable<string> moreTypes = new[]
-        //    {
-        //        "Bank.Domain.Models"
-        //    };
+        [Fact]
+        public void ViewModels_ShouldAccessModels_ReturnsTrue()
+        {
+            IEnumerable<string> moreTypes = new[]
+            {
+                "Bank.Domain.Models"
+            };
 
-        //    IArchRule domainShouldNotAccessOtherLayers =
-        //        Types()
-        //        .That()
-        //        .ResideInNamespace("Bank.Application.ViewModels.AccountViewModel")
-        //        .Should()
-        //        .DependOnAny(moreTypes);
+            IArchRule shouldAccessModels =
+                Types()
+                .That()
+                .ResideInNamespace("Bank.Application.ViewModels")
+                .Should()
+                .DependOnAny(
+                    Types().That().ResideInNamespace("Bank.Domain.Models")
+                 );
+            bool checkedRule = shouldAccessModels.HasNoViolations(architectureApplication);
+            Assert.True(checkedRule, "ViewModels should access Models.");
+            //shouldAccessModels.Check(architectureApplication);
+        }
 
-        //    domainShouldNotAccessOtherLayers.Check(architectureApplication);
-        //}
+        [Fact]
+        public void ViewModels_ShouldNotAccessModels_ReturnsFalse()
+        {
+            IEnumerable<string> moreTypes = new[]
+            {
+                "Bank.Domain.Models"
+            };
+
+            IArchRule shouldNotAccessModels =
+                Types()
+                .That()
+                .ResideInNamespace("Bank.Application.ViewModels")
+                .Should()
+                .NotDependOnAny(
+                    Types().That().ResideInNamespace("Bank.Domain.Models")
+                 );
+            bool checkedRule = shouldNotAccessModels.HasNoViolations(architectureApplication);
+            Assert.False(checkedRule, "ViewModels should access Models.");
+            //shouldAccessModels.Check(architectureApplication);
+        }
 
         [Fact]
         public void Controllers_ShouldBeAuthorized_ReturnTrue()
