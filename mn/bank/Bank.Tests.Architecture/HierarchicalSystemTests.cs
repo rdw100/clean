@@ -17,10 +17,14 @@ namespace Bank.Tests.Arch
 
         private const string SystemNamespace = "Bank";
         private const string ApplicationNamespace = SystemNamespace + ".Application";
+        private const string ApplicationInterfaces = ApplicationNamespace + ".Interfaces";
+        private const string ApplicationViewModels = ApplicationNamespace + ".ViewModels";
+        private const string ApplicationServices = ApplicationNamespace + ".Services";
         private const string DomainNamespace = SystemNamespace + ".Domain";
         private const string DomainModels = DomainNamespace + ".Models";
         private const string PresentationApiControllers = SystemNamespace + "Api.Controllers";
         private const string PresentationMvcNamespace = SystemNamespace + ".Mvc";
+        private const string PresentationMvcControllers = SystemNamespace + ".Mvc.Controllers";
 
         ////TIP: load your architecture once at the start to maximize performance of your tests
         //private static readonly Architecture architectureDomain =
@@ -29,31 +33,17 @@ namespace Bank.Tests.Arch
         //        System.Reflection.Assembly.Load("Bank.Domain")
         //    ).Build();
 
+        private static readonly Architecture applicationToDomainArchitecture = 
+            new ArchLoader().LoadAssemblies(
+                System.Reflection.Assembly.Load(ApplicationNamespace),
+                System.Reflection.Assembly.Load(DomainNamespace)
+            ).Build();
+        
         private static readonly Architecture presentationArchitecture =
             new ArchLoader().LoadAssemblies(
                 System.Reflection.Assembly.Load(PresentationMvcNamespace),
                 System.Reflection.Assembly.Load(ApplicationNamespace)
             ).Build();
-
-        //[Fact]
-        //public void DomainShouldNotAccessDomainCore()
-        //{
-
-        //    IArchRule domainShouldNotAccessCore =
-        //        Types().That().Are(Application).Should()
-        //        .NotDependOnAny(Presentation).Because("it's forbidden");
-
-        //    domainShouldNotAccessCore.Check(architectureDomain);
-        //}
-
-
-        //// replace <ExampleClass> and <ForbiddenClass> with classes from the assemblies you want to test
-
-        private static readonly Architecture architectureApplication = new ArchLoader().LoadAssemblies(
-            System.Reflection.Assembly.Load("Bank.Application"),
-            System.Reflection.Assembly.Load("Bank.Domain")
-            )
-            .Build();
 
         //private static readonly Architecture architectureInfrastructureBus = new ArchLoader().LoadAssemblies(
         //    System.Reflection.Assembly.Load("Bank.Infra.Bus"))
@@ -127,41 +117,49 @@ namespace Bank.Tests.Arch
         //    domainShouldNotAccessOtherLayers.Check(architectureApplication);
         //}
 
-        //[Fact]
-        //public void ApplicationServicesShouldNotAccessModels()
-        //{
-        //    IEnumerable<string> moreTypes = new[]
-        //    {
-        //        "Bank.Domain.Models"
-        //    };
+        [Fact]
+        public void ApplicationServices_ShouldNotAccessModels_ReturnsTrue()
+        {
+            IArchRule servicesShouldNotAccessModles =
+                Types()
+                .That()
+                .ResideInNamespace(ApplicationServices)
+                .Should()
+                .NotDependOnAny(Types().That().ResideInNamespace(DomainModels));
 
-        //    IArchRule domainShouldNotAccessOtherLayers =
-        //        Types()
-        //        .That()
-        //        .ResideInAssembly("Bank.Application.Services")
-        //        .Should()
-        //        .NotDependOnAny(moreTypes);
+            bool checkedRule = servicesShouldNotAccessModles.HasNoViolations(applicationToDomainArchitecture);
+            Assert.True(checkedRule, "Services should not access Models.");
+            //servicesShouldNotAccessModles.Check(applicationToDomainArchitecture);
+        }
 
-        //    domainShouldNotAccessOtherLayers.Check(architectureApplication);
-        //}
+        [Fact]
+        public void ApplicationServices_ShouldAccessModels_ReturnsFalse()
+        {
+            IArchRule servicesShouldAccessModles =
+                Types()
+                .That()
+                .ResideInNamespace(ApplicationServices)
+                .Should()
+                .DependOnAny(Types().That().ResideInNamespace(DomainModels));
+
+            bool checkedRule = servicesShouldAccessModles.HasNoViolations(applicationToDomainArchitecture);
+            Assert.False(checkedRule, "Services should not access Models.");
+            //servicesShouldAccessModles.Check(applicationToDomainArchitecture);
+        }
 
         [Fact]
         public void ViewModels_ShouldAccessModels_ReturnsTrue()
         {
-            IEnumerable<string> moreTypes = new[]
-            {
-                "Bank.Domain.Models"
-            };
-
             IArchRule shouldAccessModels =
                 Types()
                 .That()
-                .ResideInNamespace("Bank.Application.ViewModels")
+                .ResideInNamespace(ApplicationViewModels)
                 .Should()
                 .DependOnAny(
-                    Types().That().ResideInNamespace("Bank.Domain.Models")
+                    Types().That().ResideInNamespace(DomainModels)
                  );
-            bool checkedRule = shouldAccessModels.HasNoViolations(architectureApplication);
+
+            bool checkedRule = shouldAccessModels.HasNoViolations(applicationToDomainArchitecture);
             Assert.True(checkedRule, "ViewModels should access Models.");
             //shouldAccessModels.Check(architectureApplication);
         }
@@ -169,20 +167,16 @@ namespace Bank.Tests.Arch
         [Fact]
         public void ViewModels_ShouldNotAccessModels_ReturnsFalse()
         {
-            IEnumerable<string> moreTypes = new[]
-            {
-                "Bank.Domain.Models"
-            };
-
             IArchRule shouldNotAccessModels =
                 Types()
                 .That()
-                .ResideInNamespace("Bank.Application.ViewModels")
+                .ResideInNamespace(ApplicationViewModels)
                 .Should()
                 .NotDependOnAny(
-                    Types().That().ResideInNamespace("Bank.Domain.Models")
+                    Types().That().ResideInNamespace(DomainModels)
                  );
-            bool checkedRule = shouldNotAccessModels.HasNoViolations(architectureApplication);
+
+            bool checkedRule = shouldNotAccessModels.HasNoViolations(applicationToDomainArchitecture);
             Assert.False(checkedRule, "ViewModels should access Models.");
             //shouldAccessModels.Check(architectureApplication);
         }
@@ -192,10 +186,10 @@ namespace Bank.Tests.Arch
         {
             IArchRule shouldBeAuthorized = Classes()
                 .That()
-                .ResideInNamespace("Bank.Mvc.Controllers")
+                .ResideInNamespace(PresentationMvcControllers)
                 .And()
                 .DependOnAny(
-                    Types().That().ResideInNamespace("Bank.Application.Interfaces")
+                    Types().That().ResideInNamespace(ApplicationInterfaces)
                 )
                 .Should()
                 .HaveAnyAttributesThat()
@@ -211,10 +205,10 @@ namespace Bank.Tests.Arch
         {
             IArchRule shouldNotBeAuthorized = Classes()
                 .That()                
-                .ResideInNamespace("Bank.Mvc.Controllers")
+                .ResideInNamespace(PresentationMvcControllers)
                 .And()
                 .DependOnAny(
-                    Types().That().ResideInNamespace("Bank.Application.Interfaces")
+                    Types().That().ResideInNamespace(ApplicationInterfaces)
                 )
                 .Should()
                 .NotHaveAnyAttributesThat()

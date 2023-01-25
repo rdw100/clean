@@ -83,7 +83,7 @@ namespace Bank.Tests.Arch
                 .DependOnAny(PresentationLayer).Because("It's forbidden.");
             bool checkedRule = applicationLayerShouldAccessPresentationLayer.HasNoViolations(applicationToPresentationArchitecture);
             Assert.False(checkedRule, "Application must not depend on Presentation.");
-            //applicationLayerShouldNotAccessPresentationLayer.Check(applicationToPresentationArchitecture);
+            //applicationLayerShouldAccessPresentationLayer.Check(applicationToPresentationArchitecture);
         }
 
         [Fact]
@@ -116,7 +116,7 @@ namespace Bank.Tests.Arch
                 .DependOnAny(ApplicationLayer).Because("It's forbidden.");
             bool checkedRule = domainLayerShouldAccessApplicationLayer.HasNoViolations(domainToAppArchitecture);
             Assert.False(checkedRule, "Domain must not depend on Application.");
-            //domainLayerShouldNotAccessApplicationLayer.Check(domainToAppArchitecture);
+            //domainLayerShouldAccessApplicationLayer.Check(domainToAppArchitecture);
         }
 
         [Fact]
