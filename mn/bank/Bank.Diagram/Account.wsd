@@ -1,5 +1,5 @@
 ```puml
-@startuml [Account Command]
+@startuml Account
 
 frame Presentation {
     component [AccountController] as Controller #a7d7fd
@@ -11,7 +11,7 @@ frame Application {
     Service .|> ViewModel
 }
 
-Controller -(0)- Service : IAccountService
+Controller -(0- Service : IAccountService
 Controller -(0- ViewModel 
 
 frame Infrastructure {

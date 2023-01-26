@@ -1,2 +1,2 @@
-![Account Component Diagram](./Bank.Diagram/Account.svg "Account")
+![Account Component Diagram](./Bank.Diagram/Account/Account.svg "Account")
 
