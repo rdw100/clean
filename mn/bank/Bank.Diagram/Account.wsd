@@ -7,12 +7,9 @@ frame Presentation {
 
 frame Application {
     component AccountService as Service #a2fdba
-    component AccountVM as ViewModel #a2fdba
-    Service .|> ViewModel
 }
 
 Controller -(0- Service : IAccountService
-Controller -(0- ViewModel 
 
 frame Infrastructure {
     component [AccountRepository] as Repository #ffa09c
