@@ -1,0 +1,31 @@
+```puml
+@startuml [Account Command]
+
+frame Presentation {
+    component [AccountController] as Controller #a7d7fd
+}
+
+frame Application {
+    component AccountService as Service #a2fdba
+    component AccountVM as ViewModel #a2fdba
+    Service .|> ViewModel
+}
+
+Controller -(0)- Service : IAccountService
+Controller -(0- ViewModel 
+
+frame Infrastructure {
+    component [AccountRepository] as Repository #ffa09c
+}
+
+Service -(0- Repository : IAccountRepository
+
+frame Domain {
+    component Account as Model #fcfdb9  
+}
+
+Repository -- Model
+
+@enduml
+
+```
