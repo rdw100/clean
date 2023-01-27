@@ -1,6 +1,7 @@
 using Bank.Application.Interfaces;
 using Bank.Application.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace Bank.Api.Controllers
 {
@@ -14,6 +15,9 @@ namespace Bank.Api.Controllers
         {
             _accountService = accountService;
         }
+
+        [HttpGet]
+        public IActionResult Get() => Ok(_accountService.GetAccounts());
 
         [HttpPost]
         public IActionResult Post([FromBody] AccountViewModel accountViewModel)
