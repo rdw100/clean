@@ -1,10 +1,5 @@
 ﻿using Leave.Application.DTOs.Common;
-using Leave.Domain;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Leave.Application.DTOs.LeaveType;
 
 namespace Leave.Application.DTOs.LeaveRequest
 {

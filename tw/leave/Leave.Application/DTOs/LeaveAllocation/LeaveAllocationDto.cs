@@ -1,4 +1,5 @@
 ﻿using Leave.Application.DTOs.Common;
+using Leave.Application.DTOs.LeaveType;
 using Leave.Domain;
 using System;
 using System.Collections.Generic;
@@ -6,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Leave.Application.DTOs
+namespace Leave.Application.DTOs.LeaveAllocation
 {
     public class LeaveAllocationDto : BaseDto
     {

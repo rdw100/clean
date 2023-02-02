@@ -1,4 +1,5 @@
 ﻿using Leave.Application.DTOs.Common;
+using Leave.Application.DTOs.LeaveType;
 
 namespace Leave.Application.DTOs.LeaveRequest
 {
