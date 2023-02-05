@@ -1,6 +1,4 @@
-﻿using Leave.Application.DTOs.Common;
-
-namespace Leave.Application.DTOs.LeaveAllocation
+﻿namespace Leave.Application.DTOs.LeaveAllocation
 {
     public class CreateLeaveAllocationDto
     {

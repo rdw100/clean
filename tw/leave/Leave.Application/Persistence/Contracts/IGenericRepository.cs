@@ -15,6 +15,7 @@ namespace Leave.Application.Persistence.Contracts
         Task<T> GetById(int id);
         Task<IReadOnlyList<T>> GetAll();
         Task<T> Add(T entity);
+        Task<bool> Exists(int id);
         Task<T> Update(T entity);
         Task<T> DeleteById(T entity);
     }
