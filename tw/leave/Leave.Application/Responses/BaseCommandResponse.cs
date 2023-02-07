@@ -1,8 +1,11 @@
 ﻿namespace Leave.Application.Responses
 {
     /// <summary>
-    /// Creates a custom reponse with returned types.
+    /// Creates a custom response for returned types.
     /// </summary>
+    /// <remarks>
+    /// Custom response can inherit base and implement details.
+    /// </remarks>
     public class BaseCommandResponse
     {
         public int Id { get; set; }
