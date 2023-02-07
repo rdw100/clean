@@ -1,10 +1,5 @@
 ﻿using FluentValidation;
 using Leave.Application.Persistence.Contracts;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Leave.Application.DTOs.LeaveAllocation.Validators
 {
@@ -29,7 +24,6 @@ namespace Leave.Application.DTOs.LeaveAllocation.Validators
                     return leaveTypeExists;
                 })
                 .WithMessage("{PropertyName} does not exist.");
-
         }
     }
 }

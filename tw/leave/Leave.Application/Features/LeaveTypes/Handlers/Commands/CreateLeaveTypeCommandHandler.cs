@@ -25,9 +25,7 @@ namespace Leave.Application.Features.LeaveTypes.Handlers.Commands
             var validationResult = await validator.ValidateAsync(request.LeaveTypeDto);
 
             if (validationResult.IsValid == false)
-                throw new Exception();
-
-            
+                throw new Exception();            
 
             var leaveType = _mapper.Map<LeaveType>(request.LeaveTypeDto);
 

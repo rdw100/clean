@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
+using Leave.Application.DTOs.LeaveRequest.Validators;
 using Leave.Application.Features.LeaveRequests.Requests.Commands;
 using Leave.Application.Persistence.Contracts;
-using Leave.Domain;
 using MediatR;
 
 namespace Leave.Application.Features.LeaveRequests.Handlers.Commands
@@ -21,7 +21,13 @@ namespace Leave.Application.Features.LeaveRequests.Handlers.Commands
         {
             var leaveRequest = await _leaveRequestRepository.GetById(request.LeaveRequestDto.Id);
 
-            if(request.LeaveRequestDto != null)
+            var validator = new UpdateLeaveRequestDtoValidator(_leaveRequestRepository);
+            var validationResult = await validator.ValidateAsync(request.LeaveRequestDto);
+
+            if (validationResult.IsValid == false)
+                throw new Exception();
+
+            if (request.LeaveRequestDto != null)
             {
                 _mapper.Map(request.LeaveRequestDto, leaveRequest);
 
