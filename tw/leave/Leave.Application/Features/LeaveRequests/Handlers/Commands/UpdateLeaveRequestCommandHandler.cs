@@ -19,13 +19,13 @@ namespace Leave.Application.Features.LeaveRequests.Handlers.Commands
 
         public async Task<Unit> Handle(UpdateLeaveRequestCommand request, CancellationToken cancellationToken)
         {
-            var leaveRequest = await _leaveRequestRepository.GetById(request.LeaveRequestDto.Id);
-
             var validator = new UpdateLeaveRequestDtoValidator(_leaveRequestRepository);
             var validationResult = await validator.ValidateAsync(request.LeaveRequestDto);
 
             if (validationResult.IsValid == false)
                 throw new Exception();
+
+            var leaveRequest = await _leaveRequestRepository.GetById(request.LeaveRequestDto.Id);
 
             if (request.LeaveRequestDto != null)
             {
