@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Leave.Application.DTOs.LeaveAllocation.Validators;
+using Leave.Application.Exceptions;
 using Leave.Application.Features.LeaveAllocations.Requests.Commands;
 using Leave.Application.Persistence.Contracts;
 using Leave.Domain;
@@ -29,7 +30,7 @@ namespace Leave.Application.Features.LeaveAllocations.Handlers.Commands
             var validationResult = await validator.ValidateAsync(request.LeaveAllocationDto);
 
             if (validationResult.IsValid == false)
-                throw new Exception();
+                throw new ValidationException(validationResult);
 
             var leaveAllocation = _mapper.Map<LeaveAllocation>(request.LeaveAllocationDto);
 
