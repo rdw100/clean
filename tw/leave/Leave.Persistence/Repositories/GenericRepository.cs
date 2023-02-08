@@ -41,9 +41,10 @@ namespace Leave.Persistence.Repositories
             return await _dbContext.Set<T>().FindAsync(id);
         }
 
-        public Task Update(T entity)
+        public async Task Update(T entity)
         {
-            throw new NotImplementedException();
+            _dbContext.Entry(entity).State = EntityState.Modified;
+            await _dbContext.SaveChangesAsync();
         }
     }
 }
