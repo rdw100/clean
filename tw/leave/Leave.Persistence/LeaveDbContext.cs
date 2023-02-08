@@ -16,7 +16,7 @@ namespace Leave.Persistence
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(LeaveDbContext).Assembly);
         }
 
-        public override Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess, CancellationToken cancellationToken = default)
+        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
             foreach (var entry in ChangeTracker.Entries<BaseDomainEntity>())
             {
@@ -28,7 +28,7 @@ namespace Leave.Persistence
                 }
             }
 
-            return base.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken);
+            return base.SaveChangesAsync(cancellationToken);
         }
 
         public DbSet<LeaveRequest> LeaveRequests { get; set; }

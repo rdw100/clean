@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Leave.Application\Leave.Application.csproj" />
     <ProjectReference Include="..\Leave.Domain\Leave.Domain.csproj" />
     <ProjectReference Include="..\Leave.Infrastructure\Leave.Infrastructure.csproj" />
   </ItemGroup>
