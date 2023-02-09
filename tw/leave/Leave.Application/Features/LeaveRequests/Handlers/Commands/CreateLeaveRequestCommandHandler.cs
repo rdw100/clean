@@ -3,7 +3,7 @@ using Leave.Application.DTOs.LeaveRequest.Validators;
 using Leave.Application.DTOs.LeaveType.Validators;
 using Leave.Application.Exceptions;
 using Leave.Application.Features.LeaveRequests.Requests.Commands;
-using Leave.Application.Persistence.Contracts;
+using Leave.Application.Contracts.Persistence;
 using Leave.Application.Responses;
 using Leave.Domain;
 using MediatR;

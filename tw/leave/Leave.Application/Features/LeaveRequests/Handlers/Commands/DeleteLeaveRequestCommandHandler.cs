@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Leave.Application.Exceptions;
 using Leave.Application.Features.LeaveRequests.Requests.Commands;
-using Leave.Application.Persistence.Contracts;
+using Leave.Application.Contracts.Persistence;
 using Leave.Domain;
 using MediatR;
 

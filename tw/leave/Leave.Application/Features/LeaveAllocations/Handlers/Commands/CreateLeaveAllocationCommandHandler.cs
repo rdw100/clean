@@ -2,7 +2,7 @@
 using Leave.Application.DTOs.LeaveAllocation.Validators;
 using Leave.Application.Exceptions;
 using Leave.Application.Features.LeaveAllocations.Requests.Commands;
-using Leave.Application.Persistence.Contracts;
+using Leave.Application.Contracts.Persistence;
 using Leave.Domain;
 using MediatR;
 

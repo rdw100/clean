@@ -2,7 +2,7 @@
 using Leave.Application.Exceptions;
 using Leave.Application.DTOs.LeaveType.Validators;
 using Leave.Application.Features.LeaveTypes.Requests.Commands;
-using Leave.Application.Persistence.Contracts;
+using Leave.Application.Contracts.Persistence;
 using MediatR;
 
 namespace Leave.Application.Features.LeaveTypes.Handlers.Commands

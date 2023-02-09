@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Leave.Application.Persistence.Contracts
+namespace Leave.Application.Contracts.Persistence
 {
     /// <summary>
     /// Allows classes to access database related functionality through the interface. 

@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
 using Leave.Application.DTOs.LeaveRequest.Validators;
 using Leave.Application.DTOs.LeaveRequest;
-using Leave.Application.Persistence.Contracts;
+using Leave.Application.Contracts.Persistence;
 using System;
 using System.Collections.Generic;
 using System.Linq;

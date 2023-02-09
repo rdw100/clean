@@ -1,6 +1,6 @@
 ﻿using Leave.Domain;
 
-namespace Leave.Application.Persistence.Contracts
+namespace Leave.Application.Contracts.Persistence
 {
     public interface ILeaveAllocationRepository : IGenericRepository<LeaveAllocation>
     {

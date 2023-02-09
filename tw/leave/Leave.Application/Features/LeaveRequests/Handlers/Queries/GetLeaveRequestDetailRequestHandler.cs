@@ -3,7 +3,7 @@ using Leave.Application.DTOs;
 using Leave.Application.DTOs.LeaveRequest;
 using Leave.Application.Features.LeaveRequests.Requests.Queries;
 using Leave.Application.Features.LeaveTypes.Requests.Queries;
-using Leave.Application.Persistence.Contracts;
+using Leave.Application.Contracts.Persistence;
 using MediatR;
 
 namespace Leave.Application.Features.LeaveRequests.Handlers.Queries
