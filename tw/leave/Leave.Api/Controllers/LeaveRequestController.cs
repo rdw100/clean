@@ -20,7 +20,7 @@ namespace Leave.Api.Controllers
 
         // GET: api/<LeaveRequestController>
         [HttpGet]
-        public async Task<ActionResult<List<LeaveRequestDto>>> Get()
+        public async Task<ActionResult<List<LeaveRequestListDto>>> Get()
         {
             var leaveRequest = await _mediator.Send(new GetLeaveRequestListRequest());
             return Ok(leaveRequest);
