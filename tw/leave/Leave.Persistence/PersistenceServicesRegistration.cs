@@ -8,13 +8,19 @@ namespace Leave.Persistence
 {
     public static class PersistenceServicesRegistration
     {
-        public static IServiceCollection ConfigurePersistenceServices(this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection ConfigurePersistenceServices
+        (
+            this IServiceCollection services, 
+            IConfiguration configuration
+        )
         {
-            services.AddDbContext<LeaveDbContext>(
+            services.AddDbContext<LeaveDbContext>
+                (
                     options =>
-                    options.UseSqlServer(
-                            configuration.GetConnectionString("LeaveConnectionString")
-                        )
+                    options.UseSqlServer
+                    (
+                        configuration.GetConnectionString("LeaveConnectionString")
+                    )
                 );
 
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
