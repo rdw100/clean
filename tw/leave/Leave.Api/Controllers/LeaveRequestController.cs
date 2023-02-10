@@ -52,6 +52,15 @@ namespace Leave.Api.Controllers
             return NoContent();
         }
 
+        // PUT api/<LeaveRequestsController>/changeapproval/5
+        [HttpPut("changeapproval/{id}")]
+        public async Task<ActionResult> ChangeApproval(int id, [FromBody] ChangeLeaveRequestApprovalDto changeLeaveRequestApproval)
+        {
+            var command = new UpdateLeaveRequestCommand { Id = id, ChangeLeaveRequestApprovalDto = changeLeaveRequestApproval };
+            await _mediator.Send(command);
+            return NoContent();
+        }
+
         // DELETE api/<LeaveRequestController>/5
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(int id)
