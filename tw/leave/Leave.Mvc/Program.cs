@@ -1,6 +1,13 @@
+using Leave.Mvc.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddHttpClient<IClient, Client>(cl => cl.BaseAddress = new Uri("https://localhost:44309"));//7171
+//builder.Services.AddScoped<ILeaveTypeService, LeaveTypeService>();
+//builder.Services.AddScoped<ILeaveAllocationService, LeaveAllocationService>();
+//builder.Services.AddScoped<ILeaveRequestService, LeaveRequestService>();
+
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
