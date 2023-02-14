@@ -5,6 +5,7 @@ using Leave.Application.Exceptions;
 using Leave.Application.Features.LeaveTypes.Handlers.Commands;
 using Leave.Application.Features.LeaveTypes.Requests.Commands;
 using Leave.Application.Profiles;
+using Leave.Application.Responses;
 using Leave.Application.UnitTests.Mocks;
 using Moq;
 using Shouldly;
@@ -43,7 +44,7 @@ namespace Leave.Application.UnitTests.LeaveTypes.Commands
 
             var leaveTypes = await _mockRepo.Object.GetAll();
 
-            result.ShouldBeOfType<int>();
+            result.ShouldBeOfType<BaseCommandResponse>();
             
             leaveTypes.Count.ShouldBe(4);
         }
@@ -53,16 +54,13 @@ namespace Leave.Application.UnitTests.LeaveTypes.Commands
         {
             _leaveTypeDto.DefaultDays = -1;
 
-            ValidationException ex = await Should.ThrowAsync<ValidationException>
-                ( async () =>
-                    await _handler.Handle(new CreateLeaveTypeCommand() { LeaveTypeDto = _leaveTypeDto}, CancellationToken.None)
-                );
+            var result = await _handler.Handle(new CreateLeaveTypeCommand() { LeaveTypeDto = _leaveTypeDto }, CancellationToken.None);
 
             var leaveTypes = await _mockRepo.Object.GetAll();
 
             leaveTypes.Count.ShouldBe(3);
 
-            ex.ShouldNotBeNull();
+            result.ShouldBeOfType<BaseCommandResponse>();
         }
     }
 }
