@@ -92,9 +92,17 @@ namespace Leave.Mvc.Controllers
             return View(leaveType);
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
+        // DELETE: LeaveTypesController/Delete/5
         public async Task<ActionResult> Delete(int id)
+        {
+            var model = await _leaveTypeService.GetLeaveTypeDetails(id);
+
+            return View(model);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> DeleteConfirmed(int id)
         {
             try
             {
@@ -111,7 +119,7 @@ namespace Leave.Mvc.Controllers
                 ModelState.AddModelError("", ex.Message);
             }
 
-            return View();
+            return RedirectToAction("Index");
         }
 
         [HttpPost]
