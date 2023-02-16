@@ -4,21 +4,21 @@ using Microsoft.Extensions.Configuration;
 
 namespace Leave.Identity
 {
-    public class LeaveManagementIdentityDbContextFactory : IDesignTimeDbContextFactory<LeaveManagementIdentityDbContext>
+    public class LeaveManagementIdentityDbContextFactory : IDesignTimeDbContextFactory<LeaveIdentityDbContext>
     {
-        public LeaveManagementIdentityDbContext CreateDbContext(string[] args)
+        public LeaveIdentityDbContext CreateDbContext(string[] args)
         {
             IConfigurationRoot configuration = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("appsettings.json")
                 .Build();
 
-            var builder = new DbContextOptionsBuilder<LeaveManagementIdentityDbContext>();
-            var connectionString = configuration.GetConnectionString("LeaveManagementConnectionString");
+            var builder = new DbContextOptionsBuilder<LeaveIdentityDbContext>();
+            var connectionString = configuration.GetConnectionString("LeaveIdentityConnectionString");
 
             builder.UseSqlServer(connectionString);
 
-            return new LeaveManagementIdentityDbContext(builder.Options);
+            return new LeaveIdentityDbContext(builder.Options);
         }
     }
 }

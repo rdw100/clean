@@ -17,6 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Leave.Identity\Leave.Identity.csproj" />
     <ProjectReference Include="..\Leave.Infrastructure\Leave.Infrastructure.csproj" />
     <ProjectReference Include="..\Leave.Persistence\Leave.Persistence.csproj" />
   </ItemGroup>

@@ -18,12 +18,12 @@ namespace Leave.Identity
         {
             services.Configure<JwtSettings>(configuration.GetSection("JwtSettings"));
 
-            services.AddDbContext<LeaveManagementIdentityDbContext>(options =>
-                options.UseSqlServer(configuration.GetConnectionString("LeaveManagementIdentityConnectionString"),
-                b => b.MigrationsAssembly(typeof(LeaveManagementIdentityDbContext).Assembly.FullName)));
+            services.AddDbContext<LeaveIdentityDbContext>(options =>
+                options.UseSqlServer(configuration.GetConnectionString("LeaveIdentityConnectionString"),
+                b => b.MigrationsAssembly(typeof(LeaveIdentityDbContext).Assembly.FullName)));
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
-                .AddEntityFrameworkStores<LeaveManagementIdentityDbContext>().AddDefaultTokenProviders();
+                .AddEntityFrameworkStores<LeaveIdentityDbContext>().AddDefaultTokenProviders();
 
             services.AddTransient<IAuthService, AuthService>();
             services.AddTransient<IUserService, UserService>();

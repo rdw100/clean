@@ -5,9 +5,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Leave.Identity
 {
-    public class LeaveManagementIdentityDbContext : IdentityDbContext<ApplicationUser>
+    public class LeaveIdentityDbContext : IdentityDbContext<ApplicationUser>
     {
-        public LeaveManagementIdentityDbContext(DbContextOptions<LeaveManagementIdentityDbContext> options)
+        public LeaveIdentityDbContext(DbContextOptions<LeaveIdentityDbContext> options)
             : base(options)
         {
         }
