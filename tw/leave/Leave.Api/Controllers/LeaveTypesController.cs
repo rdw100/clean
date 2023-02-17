@@ -22,7 +22,6 @@ namespace Leave.Api.Controllers
 
         // GET: api/<LeaveTypesController>
         [HttpGet]
-        [Authorize]
         public async Task<ActionResult<List<LeaveTypeDto>>> Get()
         {
             var leaveTypes = await _mediator.Send(new GetLeaveTypeListRequest());
