@@ -6,7 +6,7 @@ using System.Data;
 
 namespace Leave.Mvc.Controllers
 {
-    //[Authorize(Roles = "Administrator")]
+    [Authorize(Roles = "Administrator")]
     public class LeaveTypesController : Controller
     {
         private readonly ILeaveTypeService _leaveTypeService;
@@ -139,6 +139,7 @@ namespace Leave.Mvc.Controllers
                 ModelState.AddModelError("", ex.Message);
             }
 
+            // return View();
             return BadRequest();
         }
     }
