@@ -42,5 +42,13 @@ namespace Leave.Persistence.Repositories
                 .FirstOrDefaultAsync(q => q.Id == id);
             return leaveAllocations;
         }
+
+        public async Task<LeaveAllocation> GetUserAllocations(string userId, int leaveTypeId)
+        {
+            return await _dbContext.LeaveAllocations.FirstOrDefaultAsync(
+                q => q.EmployeeId == userId
+                && q.LeaveTypeId == leaveTypeId
+                );
+        }
     }
 }

@@ -57,7 +57,6 @@ namespace Leave.Mvc.Models
         public List<LeaveRequestVM> LeaveRequests { get; set; }
     }
 
-
     public class EmployeeLeaveRequestViewVM
     {
         public List<LeaveAllocationVM> LeaveAllocations { get; set; }

@@ -13,9 +13,9 @@ namespace Leave.Mvc.Services
 
         public LeaveRequestService(IMapper mapper, IClient httpclient, ILocalStorageService localStorageService) : base(httpclient, localStorageService)
         {
-            _localStorageService = localStorageService;
-            _mapper = mapper;
-            _httpclient = httpclient;
+            this._localStorageService = localStorageService;
+            this._mapper = mapper;
+            this._httpclient = httpclient;
         }
 
         public async Task ApproveLeaveRequest(int id, bool approved)
@@ -66,26 +66,22 @@ namespace Leave.Mvc.Services
             throw new NotImplementedException();
         }
 
-        public Task<AdminLeaveRequestViewVM> GetAdminLeaveRequestList()
+        public async Task<AdminLeaveRequestViewVM> GetAdminLeaveRequestList()
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
+            AddBearerToken();
+            var leaveRequests = await _client.LeaveRequestAllAsync();
+
+            var model = new AdminLeaveRequestViewVM
+            {
+                TotalRequests = leaveRequests.Count,
+                ApprovedRequests = leaveRequests.Count(q => q.Approved == true),
+                PendingRequests = leaveRequests.Count(q => q.Approved == null),
+                RejectedRequests = leaveRequests.Count(q => q.Approved == false),
+                LeaveRequests = _mapper.Map<List<LeaveRequestVM>>(leaveRequests)
+            };
+            return model;
         }
-
-        //public async Task<AdminLeaveRequestViewVM> GetAdminLeaveRequestList()
-        //{
-        //    AddBearerToken();
-        //    var leaveRequests = await _client.LeaveRequestAllAsync(isLoggedInUser: false);
-
-        //    var model = new AdminLeaveRequestViewVM
-        //    {
-        //        TotalRequests = leaveRequests.Count,
-        //        ApprovedRequests = leaveRequests.Count(q => q.Approved == true),
-        //        PendingRequests = leaveRequests.Count(q => q.Approved == null),
-        //        RejectedRequests = leaveRequests.Count(q => q.Approved == false),
-        //        LeaveRequests = _mapper.Map<List<LeaveRequestVM>>(leaveRequests)
-        //    };
-        //    return model;
-        //}
 
         public async Task<LeaveRequestVM> GetLeaveRequest(int id)
         {
@@ -94,23 +90,19 @@ namespace Leave.Mvc.Services
             return _mapper.Map<LeaveRequestVM>(leaveRequest);
         }
 
-        public Task<EmployeeLeaveRequestViewVM> GetUserLeaveRequests()
+        public async Task<EmployeeLeaveRequestViewVM> GetUserLeaveRequests()
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
+            AddBearerToken();
+            var leaveRequests = await _client.LeaveRequestAllAsync();
+            var allocations = await _client.LeaveAllocationAllAsync();
+            var model = new EmployeeLeaveRequestViewVM
+            {
+                LeaveAllocations = _mapper.Map<List<LeaveAllocationVM>>(allocations),
+                LeaveRequests = _mapper.Map<List<LeaveRequestVM>>(leaveRequests)
+            };
+
+            return model;
         }
-
-        //public async Task<EmployeeLeaveRequestViewVM> GetUserLeaveRequests()
-        //{
-        //    AddBearerToken();
-        //    var leaveRequests = await _client.LeaveRequestAllAsync(isLoggedInUser: true);
-        //    var allocations = await _client.LeaveAllocationAllAsync(isLoggedInUser: true);
-        //    var model = new EmployeeLeaveRequestViewVM
-        //    {
-        //        LeaveAllocations = _mapper.Map<List<LeaveAllocationVM>>(allocations),
-        //        LeaveRequests = _mapper.Map<List<LeaveRequestVM>>(leaveRequests)
-        //    };
-
-        //    return model;
-        //}
     }
 }
