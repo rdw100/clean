@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Leave.Persistence
 {
-    public class LeaveDbContext : DbContext
+    public class LeaveDbContext : AuditDbContext
     {
         public LeaveDbContext(DbContextOptions<LeaveDbContext> options) 
             : base (options)
@@ -16,20 +16,20 @@ namespace Leave.Persistence
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(LeaveDbContext).Assembly);
         }
 
-        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
-        {
-            foreach (var entry in ChangeTracker.Entries<BaseDomainEntity>())
-            {
-                entry.Entity.LastModifiedDate= DateTime.Now;
+        //public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+        //{
+        //    foreach (var entry in ChangeTracker.Entries<BaseDomainEntity>())
+        //    {
+        //        entry.Entity.LastModifiedDate= DateTime.Now;
 
-                if (entry.State == EntityState.Added)
-                {
-                    entry.Entity.DateCreated = DateTime.Now;
-                }
-            }
+        //        if (entry.State == EntityState.Added)
+        //        {
+        //            entry.Entity.DateCreated = DateTime.Now;
+        //        }
+        //    }
 
-            return base.SaveChangesAsync(cancellationToken);
-        }
+        //    return base.SaveChangesAsync(cancellationToken);
+        //}
 
         public DbSet<LeaveRequest> LeaveRequests { get; set; }
         public DbSet<LeaveType> LeaveTypes { get; set; }

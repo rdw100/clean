@@ -8,16 +8,16 @@ namespace Leave.Persistence.Repositories
     {
 
         private readonly LeaveDbContext _context;
-        //private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly IHttpContextAccessor _httpContextAccessor;
         private ILeaveAllocationRepository _leaveAllocationRepository;
         private ILeaveTypeRepository _leaveTypeRepository;
         private ILeaveRequestRepository _leaveRequestRepository;
 
 
-        public UnitOfWork(LeaveDbContext context)//, IHttpContextAccessor httpContextAccessor)
+        public UnitOfWork(LeaveDbContext context, IHttpContextAccessor httpContextAccessor)
         {
             _context = context;
-           // _httpContextAccessor = httpContextAccessor;
+            _httpContextAccessor = httpContextAccessor;
         }
 
         public ILeaveAllocationRepository LeaveAllocationRepository =>
@@ -35,10 +35,10 @@ namespace Leave.Persistence.Repositories
 
         public async Task Save()
         {
-            //var username = _httpContextAccessor.HttpContext.User.FindFirst(CustomClaimTypes.Uid)?.Value;
+            var username = _httpContextAccessor.HttpContext.User.FindFirst(CustomClaimTypes.Uid)?.Value;
 
-            //await _context.SaveChangesAsync(username);
-            await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync(username);
+            //await _context.SaveChangesAsync();
         }
     }
 }
