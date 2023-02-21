@@ -3,6 +3,7 @@ using Leave.Infrastructure;
 using Leave.Persistence;
 using Leave.Identity;
 using Microsoft.OpenApi.Models;
+using Leave.Api.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,6 +28,16 @@ builder.Services.AddCors(o =>
 });
 
 var app = builder.Build();
+
+// Configure the HTTP request pipeline.
+if (app.Environment.IsDevelopment())
+{
+    app.UseDeveloperExceptionPage();
+}
+
+app.UseMiddleware<ExceptionMiddleware>();
+
+app.UseAuthentication();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
