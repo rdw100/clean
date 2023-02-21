@@ -13,16 +13,23 @@ namespace Leave.Persistence.Repositories
             _dbContext = dbContext;
         }
 
-        public async Task ChangeApprovalStatus(LeaveRequest leaveRequest, bool approvalStatus)
+        public async Task ChangeApprovalStatus(LeaveRequest leaveRequest, bool? approvalStatus)
         {
             leaveRequest.Approved = approvalStatus;
             _dbContext.Entry(leaveRequest).State = EntityState.Modified;
-            await _dbContext.SaveChangesAsync();
         }
 
         public async Task<List<LeaveRequest>> GetLeaveRequestsWithDetails()
         {
             var leaveRequests = await _dbContext.LeaveRequests
+                .Include(q => q.LeaveType)
+                .ToListAsync();
+            return leaveRequests;
+        }
+
+        public async Task<List<LeaveRequest>> GetLeaveRequestsWithDetails(string userId)
+        {
+            var leaveRequests = await _dbContext.LeaveRequests.Where(q => q.RequestingEmployeeId == userId)
                 .Include(q => q.LeaveType)
                 .ToListAsync();
             return leaveRequests;

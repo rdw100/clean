@@ -4,7 +4,6 @@
     ViewData["Title"] = "Index";
 }
 
-
 <div class="row">
     <div class="col-md-3">
         <div class="info-box">
@@ -110,19 +109,19 @@
                 <td>
                     @if (item.Cancelled)
                     {
-                        <span class="badge badge-secondary">Cancelled</span>
+                        <span class="badge bg-secondary">Cancelled</span>
                     }
                     else if (item.Approved == true)
                     {
-                        <span class="badge badge-success">Approved</span>
+                        <span class="badge bg-secondary">Approved</span>
                     }
                     else if (item.Approved == false)
                     {
-                        <span class="badge badge-danger">Rejected</span>
+                        <span class="badge bg-danger">Rejected</span>
                     }
                     else
                     {
-                        <span class="badge badge-warning">Pending Approval</span>
+                        <span class="badge bg-warning">Pending Approval</span>
                     }
                 </td>
                 <td>

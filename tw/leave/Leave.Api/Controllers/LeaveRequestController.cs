@@ -20,12 +20,12 @@ namespace Leave.Api.Controllers
             _mediator = mediator;
         }
 
-        // GET: api/<LeaveRequestController>
+        // GET: api/<LeaveRequestsController>
         [HttpGet]
-        public async Task<ActionResult<List<LeaveRequestListDto>>> Get()
+        public async Task<ActionResult<List<LeaveRequestListDto>>> Get(bool isLoggedInUser = false)
         {
-            var leaveRequest = await _mediator.Send(new GetLeaveRequestListRequest());
-            return Ok(leaveRequest);
+            var leaveRequests = await _mediator.Send(new GetLeaveRequestListRequest() { IsLoggedInUser = isLoggedInUser });
+            return Ok(leaveRequests);
         }
 
         // GET api/<LeaveRequestController>/5

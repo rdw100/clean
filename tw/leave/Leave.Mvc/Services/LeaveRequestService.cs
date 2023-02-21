@@ -13,9 +13,9 @@ namespace Leave.Mvc.Services
 
         public LeaveRequestService(IMapper mapper, IClient httpclient, ILocalStorageService localStorageService) : base(httpclient, localStorageService)
         {
-            this._localStorageService = localStorageService;
-            this._mapper = mapper;
-            this._httpclient = httpclient;
+            _localStorageService = localStorageService;
+            _mapper = mapper;
+            _httpclient = httpclient;
         }
 
         public async Task ApproveLeaveRequest(int id, bool approved)
@@ -68,9 +68,8 @@ namespace Leave.Mvc.Services
 
         public async Task<AdminLeaveRequestViewVM> GetAdminLeaveRequestList()
         {
-            //throw new NotImplementedException();
             AddBearerToken();
-            var leaveRequests = await _client.LeaveRequestAllAsync();
+            var leaveRequests = await _client.LeaveRequestAllAsync(isLoggedInUser: false);
 
             var model = new AdminLeaveRequestViewVM
             {
@@ -92,10 +91,9 @@ namespace Leave.Mvc.Services
 
         public async Task<EmployeeLeaveRequestViewVM> GetUserLeaveRequests()
         {
-            //throw new NotImplementedException();
             AddBearerToken();
-            var leaveRequests = await _client.LeaveRequestAllAsync();
-            var allocations = await _client.LeaveAllocationAllAsync();
+            var leaveRequests = await _client.LeaveRequestAllAsync(isLoggedInUser: true);
+            var allocations = await _client.LeaveAllocationAllAsync(isLoggedInUser: true);
             var model = new EmployeeLeaveRequestViewVM
             {
                 LeaveAllocations = _mapper.Map<List<LeaveAllocationVM>>(allocations),

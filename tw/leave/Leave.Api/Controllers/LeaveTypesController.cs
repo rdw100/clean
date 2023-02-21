@@ -19,7 +19,7 @@ namespace Leave.Api.Controllers
         public LeaveTypesController(IMediator mediator, IHttpContextAccessor httpContextAccessor)
         {
             _mediator = mediator;
-            this._httpContextAccessor = httpContextAccessor;
+            _httpContextAccessor = httpContextAccessor;
         }
 
         // GET: api/<LeaveTypesController>
