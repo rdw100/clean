@@ -4,29 +4,30 @@ using Leave.Application.Features.LeaveRequests.Requests.Commands;
 using Leave.Application.Contracts.Persistence;
 using Leave.Domain;
 using MediatR;
+using Leave.Application.Features.LeaveTypes.Requests.Commands;
 
 namespace Leave.Application.Features.LeaveRequests.Handlers.Commands
 {
     public class DeleteLeaveRequestCommandHandler : IRequestHandler<DeleteLeaveRequestCommand>
     {
-        private readonly ILeaveRequestRepository _leaveRequestRepository;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
 
-        public DeleteLeaveRequestCommandHandler(ILeaveRequestRepository leaveRequestRepository, IMapper mapper)
+        public DeleteLeaveRequestCommandHandler(IUnitOfWork unitOfWork, IMapper mapper)
         {
-            _leaveRequestRepository = leaveRequestRepository;
+            _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
 
         public async Task<Unit> Handle(DeleteLeaveRequestCommand request, CancellationToken cancellationToken)
         {
-            var leaveRequest = await _leaveRequestRepository.GetById(request.Id);
+            var leaveRequest = await _unitOfWork.LeaveRequestRepository.GetById(request.Id);
 
             if (leaveRequest == null)
-                throw new NotFoundException(nameof(leaveRequest), request.Id);
+                throw new NotFoundException(nameof(LeaveRequest), request.Id);
 
-            await _leaveRequestRepository.DeleteById(leaveRequest);
-
+            await _unitOfWork.LeaveRequestRepository.Delete(leaveRequest);
+            await _unitOfWork.Save();
             return Unit.Value;
         }
     }

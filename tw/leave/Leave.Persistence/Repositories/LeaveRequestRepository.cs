@@ -40,7 +40,6 @@ namespace Leave.Persistence.Repositories
             var leaveRequests = await _dbContext.LeaveRequests
                 .Include(q => q.LeaveType)
                 .FirstOrDefaultAsync(q => q.Id == id);
-
             return leaveRequests;
         }
     }

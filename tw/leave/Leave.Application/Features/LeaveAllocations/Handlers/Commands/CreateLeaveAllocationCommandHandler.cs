@@ -2,7 +2,10 @@
 using Leave.Application.Contracts.Identity;
 using Leave.Application.Contracts.Persistence;
 using Leave.Application.DTOs.LeaveAllocation.Validators;
+using Leave.Application.DTOs.LeaveType.Validators;
+using Leave.Application.Exceptions;
 using Leave.Application.Features.LeaveAllocations.Requests.Commands;
+using Leave.Application.Features.LeaveTypes.Requests.Commands;
 using Leave.Application.Responses;
 using Leave.Domain;
 using MediatR;
@@ -11,19 +14,16 @@ namespace Leave.Application.Features.LeaveAllocations.Handlers.Commands
 {
     public class CreateLeaveAllocationCommandHandler : IRequestHandler<CreateLeaveAllocationCommand, BaseCommandResponse>
     {
-        private readonly ILeaveAllocationRepository _leaveAllocationRepository;
-        private readonly ILeaveTypeRepository _leaveTypeRepository;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IUserService _userService;
         private readonly IMapper _mapper;
 
         public CreateLeaveAllocationCommandHandler(
-            ILeaveAllocationRepository leaveAllocationRepository,
-            ILeaveTypeRepository leaveTypeRepository,
+           IUnitOfWork unitOfWork,
             IUserService userService,
             IMapper mapper)
         {
-            _leaveAllocationRepository = leaveAllocationRepository;
-            _leaveTypeRepository = leaveTypeRepository;
+            _unitOfWork = unitOfWork;
             _userService = userService;
             _mapper = mapper;
         }
@@ -31,7 +31,7 @@ namespace Leave.Application.Features.LeaveAllocations.Handlers.Commands
         public async Task<BaseCommandResponse> Handle(CreateLeaveAllocationCommand request, CancellationToken cancellationToken)
         {
             var response = new BaseCommandResponse();
-            var validator = new CreateLeaveAllocationDtoValidator(_leaveTypeRepository);
+            var validator = new CreateLeaveAllocationDtoValidator(_unitOfWork.LeaveTypeRepository);
             var validationResult = await validator.ValidateAsync(request.LeaveAllocationDto);
 
             if (validationResult.IsValid == false)
@@ -42,14 +42,13 @@ namespace Leave.Application.Features.LeaveAllocations.Handlers.Commands
             }
             else
             {
-                var leaveType = await _leaveTypeRepository.GetById(request.LeaveAllocationDto.LeaveTypeId);
+                var leaveType = await _unitOfWork.LeaveTypeRepository.GetById(request.LeaveAllocationDto.LeaveTypeId);
                 var employees = await _userService.GetEmployees();
                 var period = DateTime.Now.Year;
                 var allocations = new List<LeaveAllocation>();
-                
                 foreach (var emp in employees)
                 {
-                    if (await _leaveAllocationRepository.AllocationExists(emp.Id, leaveType.Id, period))
+                    if (await _unitOfWork.LeaveAllocationRepository.AllocationExists(emp.Id, leaveType.Id, period))
                         continue;
                     allocations.Add(new LeaveAllocation
                     {
@@ -59,12 +58,13 @@ namespace Leave.Application.Features.LeaveAllocations.Handlers.Commands
                         Period = period
                     });
                 }
-                
-                await _leaveAllocationRepository.AddAllocations(allocations);
-  
+
+                await _unitOfWork.LeaveAllocationRepository.AddAllocations(allocations);
+                await _unitOfWork.Save();
                 response.Success = true;
                 response.Message = "Allocations Successful";
             }
+
 
             return response;
         }
