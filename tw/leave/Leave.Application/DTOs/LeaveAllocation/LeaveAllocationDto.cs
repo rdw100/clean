@@ -1,12 +1,6 @@
 ﻿using Leave.Application.DTOs.Common;
 using Leave.Application.DTOs.LeaveType;
 using Leave.Application.Models.Identity;
-using Leave.Domain;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Leave.Application.DTOs.LeaveAllocation
 {
