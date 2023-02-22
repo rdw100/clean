@@ -44,13 +44,11 @@ namespace Leave.Mvc.Controllers
                 !ModelState["LeaveTypeId"].Errors.Any() &&
                 !ModelState["RequestComments"].Errors.Any()
                )
-            //if (ModelState.IsValid)
             {
                 var response = await _leaveRequestService.CreateLeaveRequest(leaveRequest);
                 if (response.Success)
                 {
                     return RedirectToAction(nameof(Index));
-                    //return RedirectToAction(nameof(Details), new { Id = response..Message. });
                 }
                 ModelState.AddModelError("", response.ValidationErrors);
             }

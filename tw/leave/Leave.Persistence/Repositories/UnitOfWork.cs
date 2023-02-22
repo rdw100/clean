@@ -6,13 +6,11 @@ namespace Leave.Persistence.Repositories
 {
     public class UnitOfWork : IUnitOfWork
     {
-
         private readonly LeaveDbContext _context;
         private readonly IHttpContextAccessor _httpContextAccessor;
         private ILeaveAllocationRepository _leaveAllocationRepository;
         private ILeaveTypeRepository _leaveTypeRepository;
         private ILeaveRequestRepository _leaveRequestRepository;
-
 
         public UnitOfWork(LeaveDbContext context, IHttpContextAccessor httpContextAccessor)
         {
@@ -38,7 +36,6 @@ namespace Leave.Persistence.Repositories
             var username = _httpContextAccessor.HttpContext.User.FindFirst(CustomClaimTypes.Uid)?.Value;
 
             await _context.SaveChangesAsync(username);
-            //await _context.SaveChangesAsync();
         }
     }
 }

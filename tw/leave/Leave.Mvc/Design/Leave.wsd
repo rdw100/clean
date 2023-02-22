@@ -1,0 +1,44 @@
+```puml
+@startuml Leave
+
+frame Presentation {
+    component [ClientService] as ClientController #a7d7fd 
+}
+
+frame API  {
+    component [GetLeaveController]  as QueryService #a2fdba
+    component [CreateLeaveController] as CommandService #a2fdba
+}
+
+ClientController -(0- QueryService : ILeaveService
+ClientController -(0- CommandService : ILeaveService
+
+frame Application {
+    component [Request] as Request #ffa09c
+    component [RequestHandler] as RequestHandler #ffa09c  
+    component [Command] as Command #ffa09c
+    component [CommandHandler] as CommandHandler #ffa09c   
+}
+
+QueryService -(0- Command : IMediator ICommand
+CommandService -(0- Request : IMediator IRequest 
+
+Request --> RequestHandler
+Command --> CommandHandler
+
+frame "Domain Service" {
+    component [LeaveRepository] as Repository #e1d5e7  
+}
+
+RequestHandler -(0- Repository : IUnitOfWork
+CommandHandler -(0- Repository : IUnitOfWork
+
+frame "Domain Model" {
+    component Leave as Model #fcfdb9  
+}
+
+Repository -(0- Model : ILeaveRepository
+
+@enduml
+
+```
